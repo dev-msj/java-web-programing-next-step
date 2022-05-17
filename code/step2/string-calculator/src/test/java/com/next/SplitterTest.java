@@ -23,6 +23,14 @@ public class SplitterTest {
 
     @Test
     public void testCustomSplit() {
-        Assertions.assertThat(Arrays.equals(splitter.customSplit("//a\n1a2"), new String[] {"1", "2"})).isTrue();
+        Assertions.assertThat(
+                Arrays.equals(splitter.customSplit("//a\n1a2"), new String[] {"1", "2"})
+        ).isTrue();
+        Assertions.assertThat(
+                Arrays.equals(splitter.customSplit("//\n124"), new String[] {"1", "2", "4"})
+        ).isTrue();
+        Assertions.assertThat(
+                Arrays.equals(splitter.customSplit("//;;\n1;;2"), new String[] {"1", "2"})
+        ).isTrue();
     }
 }
