@@ -9,9 +9,14 @@ public class Calculator {
     }
 
     public int calculate() {
-        String[] splitResult = getSplitResult();
-        validateSplitResult(splitResult);
-        add(splitResult);
+        try {
+            String[] splitResult = getSplitResult();
+            validateSplitResult(splitResult);
+            add(splitResult);
+        } catch (RuntimeException e) {
+            System.out.println("RuntimeException] " + e.getMessage());
+            return -9999999;
+        }
 
         return this.result;
     }
@@ -20,7 +25,7 @@ public class Calculator {
         return new Splitter(this.rawString).split();
     }
 
-    private void validateSplitResult(String[] splitResult) {
+    private void validateSplitResult(String[] splitResult) throws RuntimeException {
         new Validation(splitResult).check();
     }
 

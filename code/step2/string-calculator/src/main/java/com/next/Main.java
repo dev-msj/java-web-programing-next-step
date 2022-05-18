@@ -12,7 +12,6 @@ public class Main {
     private static String getUserString() {
         Scanner scanner = new Scanner(System.in);
 
-        String value = scanner.nextLine();
-        return value;
+        return scanner.nextLine().replace("\\n", "\n");
     }
 }
