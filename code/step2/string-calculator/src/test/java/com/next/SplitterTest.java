@@ -1,5 +1,7 @@
 package com.next;
 
+import com.next.splitter.CustomSplitter;
+import com.next.splitter.DefaultSplitter;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -11,7 +13,7 @@ public class SplitterTest {
     @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3"})
     public void testDefaultSplit(final String input) {
         Assertions.assertThat(
-                Arrays.equals(new Splitter(input).split(), new String[] {"1", "2", "3"})
+                Arrays.equals(new DefaultSplitter(input).split(), new String[] {"1", "2", "3"})
         ).isTrue();
     }
 
@@ -19,7 +21,7 @@ public class SplitterTest {
     @ValueSource(strings = {"//a\n1a2a4", "//\n124", "//;;\n1;;2;;4"})
     public void testCustomSplit(final String input) {
         Assertions.assertThat(
-                Arrays.equals(new Splitter(input).split(), new String[] {"1", "2", "4"})
+                Arrays.equals(new CustomSplitter(input).split(), new String[] {"1", "2", "4"})
         ).isTrue();
     }
 }
