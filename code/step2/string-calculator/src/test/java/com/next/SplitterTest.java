@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class SplitterTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3"})
-    public void testDefaultSplit(String input) {
+    public void testDefaultSplit(final String input) {
         Assertions.assertThat(
                 Arrays.equals(new Splitter(input).split(), new String[] {"1", "2", "3"})
         ).isTrue();
@@ -17,7 +17,7 @@ public class SplitterTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"//a\n1a2a4", "//\n124", "//;;\n1;;2;;4"})
-    public void testCustomSplit(String input) {
+    public void testCustomSplit(final String input) {
         Assertions.assertThat(
                 Arrays.equals(new Splitter(input).split(), new String[] {"1", "2", "4"})
         ).isTrue();
