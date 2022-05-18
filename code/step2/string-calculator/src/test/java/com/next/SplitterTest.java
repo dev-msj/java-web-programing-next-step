@@ -1,36 +1,25 @@
 package com.next;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
 public class SplitterTest {
-    private static Splitter splitter;
-
-    @BeforeAll
-    public static void setup() {
-        splitter = new Splitter();
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3"})
+    public void testDefaultSplit(String input) {
+        Assertions.assertThat(
+                Arrays.equals(new Splitter(input).split(), new String[] {"1", "2", "3"})
+        ).isTrue();
     }
 
-    @Test
-    public void testDefaultSplit() {
-        Assertions.assertThat(Arrays.equals(splitter.split("1,2"), new String[] {"1", "2"})).isTrue();
-        Assertions.assertThat(Arrays.equals(splitter.split("1:2"), new String[] {"1", "2"})).isTrue();
-        Assertions.assertThat(Arrays.equals(splitter.split("1,2:3"), new String[] {"1", "2", "3"})).isTrue();
-    }
-
-    @Test
-    public void testCustomSplit() {
+    @ParameterizedTest
+    @ValueSource(strings = {"//a\n1a2a4", "//\n124", "//;;\n1;;2;;4"})
+    public void testCustomSplit(String input) {
         Assertions.assertThat(
-                Arrays.equals(splitter.customSplit("//a\n1a2"), new String[] {"1", "2"})
-        ).isTrue();
-        Assertions.assertThat(
-                Arrays.equals(splitter.customSplit("//\n124"), new String[] {"1", "2", "4"})
-        ).isTrue();
-        Assertions.assertThat(
-                Arrays.equals(splitter.customSplit("//;;\n1;;2"), new String[] {"1", "2"})
+                Arrays.equals(new Splitter(input).split(), new String[] {"1", "2", "4"})
         ).isTrue();
     }
 }
