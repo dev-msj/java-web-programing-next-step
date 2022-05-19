@@ -2,20 +2,36 @@ package com.book;
 
 public class StringCalculator {
     public int add(String text) {
-        if (text == null || text.isEmpty()) {
+        if (isBlank(text)) {
             return 0;
         }
 
-        if (text.contains(",")) {
-            String[] values = text.split(",");
-            int sum = 0;
-            for (String value : values) {
-                sum += Integer.parseInt(value);
-            }
+        return sum(toInts(split(text)));
+    }
 
-            return sum;
+    private boolean isBlank(String text) {
+        return text == null || text.isEmpty();
+    }
+
+    private String[] split(String text) {
+        return text.split(",");
+    }
+
+    private int[] toInts(String[] values) {
+        int[] numbers = new int[values.length];
+        for (int i = 0; i < values.length; i++) {
+            numbers[i] = Integer.parseInt(values[i]);
         }
 
-        return Integer.parseInt(text);
+        return numbers;
+    }
+
+    private int sum(int[] values) {
+        int sum = 0;
+        for (int value : values) {
+            sum += value;
+        }
+
+        return sum;
     }
 }
