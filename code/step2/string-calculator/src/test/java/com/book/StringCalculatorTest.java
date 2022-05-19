@@ -17,4 +17,9 @@ public class StringCalculatorTest {
         Assertions.assertEquals(0, cal.add(null));
         Assertions.assertEquals(0, cal.add(""));
     }
+
+    @Test
+    public void add_숫자하나() throws Exception {
+        Assertions.assertEquals(1, cal.add("1"));
+    }
 }
