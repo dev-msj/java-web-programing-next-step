@@ -14,7 +14,7 @@ public class StringCalculator {
     }
 
     private String[] split(String text) {
-        return text.split(",");
+        return text.split(",|:");
     }
 
     private int[] toInts(String[] values) {
