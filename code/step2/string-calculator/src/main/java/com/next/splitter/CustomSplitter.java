@@ -11,9 +11,7 @@ public class CustomSplitter {
     }
 
     public String[] split() {
-        Pattern pattern = Pattern.compile(RegexPattern.CUSTOM_PATTERN);
-        Matcher matcher = pattern.matcher(this.rawString);
-
+        Matcher matcher = findPattern();
         if (matcher.find()) {
             return customSplit(matcher);
         }
@@ -21,13 +19,15 @@ public class CustomSplitter {
         return new String[] {};
     }
 
+    private Matcher findPattern() {
+        Pattern pattern = Pattern.compile(RegexPattern.CUSTOM_PATTERN);
+
+        return pattern.matcher(this.rawString);
+    }
+
     private String[] customSplit(final Matcher matcher) {
         String customPattern = matcher.group(1).trim();
 
         return matcher.group(2).split(customPattern);
-    }
-
-    private boolean isCustomSplit(final String[] findResult) {
-        return findResult.length != 0;
     }
 }
