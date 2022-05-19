@@ -22,17 +22,26 @@ public class StringCalculator {
             String customDelimeter = m.group(1);
             return m.group(2).split(customDelimeter);
         }
-        
+
         return text.split(",|:");
     }
 
     private int[] toInts(String[] values) {
         int[] numbers = new int[values.length];
         for (int i = 0; i < values.length; i++) {
-            numbers[i] = Integer.parseInt(values[i]);
+            numbers[i] = toPositive(values[i]);
         }
 
         return numbers;
+    }
+
+    private int toPositive(String values) {
+        int number = Integer.parseInt(values);
+        if (number < 0) {
+            throw new RuntimeException();
+        }
+
+        return number;
     }
 
     private int sum(int[] values) {
